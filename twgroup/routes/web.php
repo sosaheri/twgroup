@@ -21,6 +21,13 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('index', 'PublicationController@index')->name('index');
+        Route::get('crearPublicacion', 'PublicationController@create')->name('crearPublicacion');
+        Route::post('guardarPublicacion', 'PublicationController@store')->name('guardarPublicacion');
+        Route::get('verPublicacion/{id}', 'PublicationController@show')->name('verPublicacion');
+
+
+        Route::post('guardarComentario', 'PublicationController@guardarComentario')->name('guardarComentario');
+
 
 });

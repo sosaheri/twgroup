@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Publication;
+use App\Comment;
+use App\User;
+use View;
+use Redirect;
+
 use Illuminate\Http\Request;
 
 class PublicationController extends Controller
@@ -12,9 +17,12 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Publication $model){
+      //  $item = $model->where('id', '=', 1)->first();
+      //  dd($item->usuario()->name());
+
+        return view('publications.index', ['publications' => $model->paginate(15)]);
+
     }
 
     /**
@@ -22,9 +30,8 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('publications.create' );
     }
 
     /**
@@ -33,8 +40,16 @@ class PublicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+
+        $publication = new \App\Publication;
+
+                $publication->title = $request->title;
+                $publication->content = $request->content;
+                $publication->user_id = auth()->user()->id;
+                $publication->save();
+
+                return redirect('index');
         //
     }
 
@@ -44,9 +59,13 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function show(Publication $publication)
-    {
-        //
+    public function show( $id){
+
+        $publication = Publication::find($id);
+        //dd($publication);
+
+        return view('publications.show', ['publication' => $publication]);
+
     }
 
     /**
@@ -82,4 +101,20 @@ class PublicationController extends Controller
     {
         //
     }
+
+    public function guardarComentario(Request $request){
+
+         $comment = new \App\Comment;
+
+         $comment->publication_id = $request->publication_id;
+         $comment->content = $request->content;
+         $comment->status = 'comento';
+         $comment->user_id = auth()->user()->id;
+
+         $comment->save();
+
+         return Redirect::back();
+
+
+      }
 }

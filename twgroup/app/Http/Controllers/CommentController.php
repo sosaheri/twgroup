@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use Redirect;
 use Illuminate\Http\Request;
+use App\Mail\AuthorNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -124,8 +126,14 @@ class CommentController extends Controller
 
         $comment->save();
 
+        Mail::send(new AuthorNotificationMail($request));
+
         return Redirect::back();
 
 
+
      }
+
+
+
 }

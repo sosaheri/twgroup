@@ -75,7 +75,6 @@ class PublicationController extends Controller
     public function show( $id){
 
         $publication = Publication::find($id);
-        //dd($publication);
 
         return view('publications.show', ['publication' => $publication]);
 

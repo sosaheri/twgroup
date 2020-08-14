@@ -7,15 +7,27 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">{{ __('Detalle de publicación') }}</div>
+                <span class="text-right" style="text-align:center; text-align:center; margin-top: -30px !important; margin-right: 20px !important;"><a href="/index">Ir a Inicio</a></span>
                 <div class="card-body">
 
                     <div class="row">
 
                         <div class="col-lg-12 col-md-12">
 
+                            @if(Session::has('mensaje'))
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong><div>{{Session::get('mensaje')}}</div></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                             @endif
+
                             <div style="padding: 0.9375rem 30px;" class="card">
 
                                 <section id="publicacion">
+
+
 
 
                                     <div class="card-body table-responsive">
@@ -160,7 +172,6 @@
                                     </div>
 
                                 </section>
-
 
 
                             </div>

@@ -8,6 +8,7 @@ use App\User;
 use View;
 use Redirect;
 use Auth;
+use Illuminate\Session\SessionManager;
 
 use Illuminate\Http\Request;
 
@@ -49,7 +50,7 @@ class PublicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request, SessionManager $sessionManager){
 
         $request->validate([
             'title' => 'required',
@@ -62,6 +63,8 @@ class PublicationController extends Controller
                 $publication->content = $request->content;
                 $publication->user_id = auth()->user()->id;
                 $publication->save();
+
+                $sessionManager->flash('mensaje', 'Publicación Creada');
 
                 return redirect('index');
         //
@@ -108,7 +111,7 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request){
+    public function update(Request $request, SessionManager $sessionManager){
 
 
         $request->validate([
@@ -122,6 +125,8 @@ class PublicationController extends Controller
                 $publication->content = $request->content;
                 $publication->save();
 
+                $sessionManager->flash('mensaje', 'Publicación Actualizada');
+
                 return redirect('index');
     }
 
@@ -131,9 +136,11 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publication $publication) {
+    public function destroy(Publication $publication, SessionManager $sessionManager) {
         $publication = Publication::find($publication->id);
         $publication->delete();
+
+        $sessionManager->flash('mensaje', 'Publicación Eliminada');
 
         return redirect('index');
     }

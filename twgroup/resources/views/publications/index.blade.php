@@ -5,6 +5,15 @@
 <div class="container">
     <div class="row">
         <div class="col">
+            @if(Session::has('mensaje'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><div>{{Session::get('mensaje')}}</div></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            @endif
+
             <div class="card">
                 <div class="card-header"><button onclick="window.location='{{ url("/crearPublicacion/") }}'"  type="button" rel="tooltip" title="Editar" class=" btn btn-primary btn-xs-fixed btn-sm">
                     <span>Crear publicación</span>

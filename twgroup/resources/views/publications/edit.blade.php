@@ -7,6 +7,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">{{ __('Actualizar publicación') }}</div>
+                <span class="text-right" style="text-align:center; text-align:center; margin-top: -30px !important; margin-right: 20px !important;"><a href="/index">Ir a Inicio</a></span>
                 <div class="card-body">
                     <form class="form" method="POST" action="{{ route('actualizarPublicacion') }}">
 
@@ -68,8 +69,10 @@
 
 
                         </div>
+
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

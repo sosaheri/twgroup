@@ -7,6 +7,7 @@ use App\Comment;
 use App\User;
 use View;
 use Redirect;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -86,9 +87,18 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function edit(Publication $publication)
-    {
-        //
+    public function edit(Publication $publication){
+        $publication = Publication::find($publication->id);
+
+        if($publication->user_id == Auth::user()->id){
+            return view('publications.edit', [ 'publication' => $publication ]);
+        }else{
+
+            $publications = Publication::all();
+            return view('publications.index', ['publications' => $publications]);
+        }
+
+
     }
 
     /**
@@ -98,9 +108,21 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publication $publication)
-    {
-        //
+    public function update(Request $request){
+
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+          ]);
+
+        $publication = Publication::find($request->id);
+
+                $publication->title = $request->title;
+                $publication->content = $request->content;
+                $publication->save();
+
+                return redirect('index');
     }
 
     /**
@@ -109,9 +131,11 @@ class PublicationController extends Controller
      * @param  \App\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publication $publication)
-    {
-        //
+    public function destroy(Publication $publication) {
+        $publication = Publication::find($publication->id);
+        $publication->delete();
+
+        return redirect('index');
     }
 
 

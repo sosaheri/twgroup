@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('crearPublicacion', 'PublicationController@create')->name('crearPublicacion');
         Route::post('guardarPublicacion', 'PublicationController@store')->name('guardarPublicacion');
         Route::get('verPublicacion/{id}', 'PublicationController@show')->name('verPublicacion');
+        Route::get('editarPublicacion/{publication}', 'PublicationController@edit')->name('editarPublicacion');
+        Route::post('actualizarPublicacion', 'PublicationController@update')->name('actualizarPublicacion');
+        Route::get('borrarPublicacion/{publication}', 'PublicationController@destroy')->name('borrarPublicacion');
 
 
         Route::post('guardarComentario', 'CommentController@guardarComentario')->name('guardarComentario');

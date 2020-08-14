@@ -21,11 +21,11 @@ cd
 <i>permisos a carpetas y seguridad</i>
 
 ```
-sudo chown -R $USER:www-data storage
-sudo chown -R $USER:www-data bootstrap/cache
-chmod -R 775 storage
-chmod -R 775 bootstrap/cache
-php artisan key:generate
+sudo chown -R $USER:www-data storage<br>
+sudo chown -R $USER:www-data bootstrap/cache<br>
+chmod -R 775 storage<br>
+chmod -R 775 bootstrap/cache<br>
+php artisan key:generate<br>
 
 ```
 <i>
@@ -41,10 +41,10 @@ nano .env
 
 ```
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=ombreBaseDeDatos
+DB_CONNECTION=mysql<br>
+DB_HOST=127.0.0.1<br>
+DB_PORT=3306<br>
+DB_DATABASE=ombreBaseDeDatos<br>
 DB_USERNAME=NombreDeUsuario
 DB_PASSWORD=contraseñaDeBaseDeDatos
 
@@ -61,14 +61,14 @@ nano .env
 
 ```
 
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=nombreUsuario
-MAIL_PASSWORD=contraseñaUsuario
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null
-MAIL_FROM_NAME="${APP_NAME}"
+MAIL_MAILER=smtp<br>
+MAIL_HOST=smtp.mailtrap.io<br>
+MAIL_PORT=2525<br>
+MAIL_USERNAME=nombreUsuario<br>
+MAIL_PASSWORD=contraseñaUsuario<br>
+MAIL_ENCRYPTION=null<br>
+MAIL_FROM_ADDRESS=null<br>
+MAIL_FROM_NAME="${APP_NAME}"<br>
 <i>
 Configuracion Cache REDIS
 
@@ -81,9 +81,9 @@ nano .env
 
 ```
 
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=contraseñaRedis
-REDIS_PORT=6379
+REDIS_HOST=127.0.0.1<br>
+REDIS_PASSWORD=contraseñaRedis<br>
+REDIS_PORT=6379<br>
 
 ### Desafío 2:
 

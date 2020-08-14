@@ -7,6 +7,7 @@ use Redirect;
 use Illuminate\Http\Request;
 use App\Mail\AuthorNotificationMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Session\SessionManager;
 
 class CommentController extends Controller
 {

@@ -89,7 +89,7 @@ REDIS_PORT=6379<br>
 
 Laravel cuenta con un ORM llamado Eloquent, este ORM nos permite simplificar las consultas a la base de datos, imagina los siguientes modelos con los siguientes atributos.
 
-Publication (id, title, content, user_id)
+Publication (id, title, content, user_id)<br>
 Comment (id, publication_id, content, status)
 
 <i>
@@ -105,15 +105,21 @@ public function comments()
 
 
 Comment 
-    public function post()
+    public function publication()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Publication::class);
     }</i>
 
 ### Desafio 3:
 
 Imaginando los modelos anteriormente mencionados, crea una Query en Eloquent (Obligatorio) que obtenga: Todas las publicaciones que contengan comentarios con la palabra "Hola" en su contenido, y que además posean status "APROBADO".
 
+
+<i>
+$publications = Publication::with('comments')<br>
+                                ->where('content', 'LIKE', '%'.'Hola'.'%')<br>
+                                ->where('status', 'LIKE', 'APROBADO')->get();
+</i>
 
 ### Desafio 4:
 

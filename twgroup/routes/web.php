@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('verPublicacion/{id}', 'PublicationController@show')->name('verPublicacion');
 
 
-        Route::post('guardarComentario', 'PublicationController@guardarComentario')->name('guardarComentario');
+        Route::post('guardarComentario', 'CommentController@guardarComentario')->name('guardarComentario');
 
 
 });

@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class PublicationController extends Controller
 {
+
+    public static function quien($id){
+        $user = User::find($id);
+
+        return $user;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +49,11 @@ class PublicationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+          ]);
 
         $publication = new \App\Publication;
 
@@ -102,19 +115,5 @@ class PublicationController extends Controller
         //
     }
 
-    public function guardarComentario(Request $request){
 
-         $comment = new \App\Comment;
-
-         $comment->publication_id = $request->publication_id;
-         $comment->content = $request->content;
-         $comment->status = 'comento';
-         $comment->user_id = auth()->user()->id;
-
-         $comment->save();
-
-         return Redirect::back();
-
-
-      }
 }

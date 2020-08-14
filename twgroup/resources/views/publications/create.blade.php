@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">{{ __('Crear publicación') }}</div>
                 <div class="card-body">
@@ -23,11 +23,7 @@
                                             <div class="row">
                                                 <div class="col-md-12 bmd-form-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                                     <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i class="material-icons">monetization_on</i>
-                                                        </span>
-                                                        </div>
+
                                                         <input id="title" type="text" name="title" class="form-control" placeholder="{{ __('Titulo') }}" value="{{ old('title', '') }}" >
                                                     </div>
 
@@ -41,16 +37,14 @@
 
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row mt-1">
                                                 <div class="col-md-12 bmd-form-group{{ $errors->has('content') ? ' has-danger' : '' }}">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i class="material-icons">notes</i>
-                                                            </span>
+                                                            <textarea class="form-control" name="content" id="content" cols="90" rows="5" placeholder="Descripción"></textarea>
+
                                                         </div>
 
-                                                        <textarea class="form-control" name="content" id="content" cols="90" rows="5" placeholder="Descripción"></textarea>
 
                                                     </div>
 
@@ -63,14 +57,15 @@
                                                 </div>
                                             </div>
 
+                                            <div class="text-right mt-2">
+                                                <button type="submit" class="btn btn-primary btn-sm">{{ __('Guardar') }}</button>
 
+                                            </div>
 
 
                         </div>
 
-                        <div class="card-footer justify-content-center">
-                            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Guardar') }}</button>
-                        </div>
+
                         </div>
                     </form>
                 </div>

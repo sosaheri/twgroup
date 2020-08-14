@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('Publicaciones') }}</div>
+                <div class="card-header"><button onclick="window.location='{{ url("/crearPublicacion/") }}'"  type="button" rel="tooltip" title="Editar" class=" btn btn-primary btn-xs-fixed btn-sm">
+                    <span>Crear publicación</span>
+                 </button></div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
@@ -22,11 +24,11 @@
 
                                 <tr>
                                     <td>{{ $item->title }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ \App\Http\Controllers\PublicationController::quien($item->user_id)->name }}</td>
+                                    <td>{{ \App\Http\Controllers\CommentController::cantidad($item->id) }}</td>
                                     <td>
-                                        <button onclick="window.location='{{ url("/verPublicacion/".$item->id) }}'"  type="button" rel="tooltip" title="Editar" class="btn btn-primary btn-link btn-sm">
-                                            <i class="material-icons">Ver</i>
+                                        <button onclick="window.location='{{ url("/verPublicacion/".$item->id) }}'"  type="button" rel="tooltip" title="Editar" class="btn btn-block btn-primary btn-xs-fixed btn-sm">
+                                             <span>Ver</span>
                                           </button>
 
                                     </td>

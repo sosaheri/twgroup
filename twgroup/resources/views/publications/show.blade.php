@@ -44,10 +44,10 @@
                                                 <article>
                                                     <div class="wk-user-info">
                                                         <div class="profile-photo profile-photo-sm img img-circle">
-                                                            <a href="/e/445a737a9305db0dc6bf270f78924e58">
-                                                                <img src="#" alt=""></a>
+                                                            <a href="">
+
                                                             </div>
-                                                            <a href="#" class="h4 user-name"><span>Autor</span>
+                                                            <a href="#" class="h4 user-name"><span>{{ \App\Http\Controllers\PublicationController::quien($publication->user_id)->name }}</span>
                                                             </a>
 
                                                         </div>
@@ -55,11 +55,21 @@
                                                 </article>
 
                                                 <article>
+                                                    <br>
                                                     <p class="h4 gray">Actividad de esta publicación</p>
                                                     <div class="row">
                                                         <div class="item-data col-md-12 col-xs-6">
-                                                            <p class="h4">18</p>
-                                                            <p>comentarios</p>
+                                                            <br>
+                                                            <p class="h4">{{ \App\Http\Controllers\CommentController::cantidad($publication->id) }}
+                                                                @if (\App\Http\Controllers\CommentController::cantidad($publication->id) == 1)
+                                                                comentario
+                                                                @else
+                                                                comentarios
+                                                                @endif
+
+
+                                                            </p>
+
                                                         </div>
 
                                                     </div>
@@ -80,21 +90,37 @@
                                                 <section class="col-md-8 col-lg-9 block-detail">
                                                     <article>
                                                         <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <h5 class="h4">Envia un comentario</h5>
 
-                                                    </div>
+
+                                                <div class="col-xs-6">
+                                                    <h5 class="h4">Envia un comentario</h5>
+
+                                                </div>
+
+
 
                                                     <form action="{{ route('guardarComentario') }}" method="post">
                                                         @csrf
+
+                                                        <div clas="bmd-form-group{{ $errors->has('content') ? ' has-danger' : '' }}">
+
                                                         <textarea name="content" id="comentario" cols="90" rows="5"></textarea>
+
+                                                        </div>
+
+                                                        @if ($errors->has('content'))
+                                                        <div id="content-error" class="error text-danger pl-3" for="content" style="display: block;">
+                                                        <strong>{{ $errors->first('content') }}</strong>
+                                                        </div>
+                                                         @endif
+
                                                         <input name="publication_id" type="text" hidden value="{{ $publication->id}}">
 
                                                         @foreach ($publication->comentarios as $item)
                                                             <hr>
 
+                                                            {{ \App\Http\Controllers\PublicationController::quien($item->user_id)->name }} dice:<br>
                                                             {{ $item->content }} <br>
-
 
                                                         @endforeach
 
@@ -106,9 +132,26 @@
 
 
                                         <aside class="col-md-4 col-lg-3">
+
+                                            @if ( \App\Http\Controllers\CommentController::comento(Auth::user()->id , $publication->id ) )
+
                                             <span >
-                                                <button style="margin-top: 30px;" type="submit" class="btn btn-block btn-lg btn-primary btn-xs-fixed"><span>Enviar mensaje</span></button>
+                                                <button disabled style="margin-top: 30px;" type="submit" class="btn btn-block btn-lg btn-primary btn-xs-fixed"><span>Enviar comentario</span></button>
                                             </span>
+
+                                            @elseif(Auth::user()->id == $publication->user_id)
+                                            <span >
+                                                <button disabled style="margin-top: 30px;" type="submit" class="btn btn-block btn-lg btn-primary btn-xs-fixed"><span>Enviar comentario</span></button>
+                                            </span>
+
+                                            @else
+                                            <span >
+                                                <button style="margin-top: 30px;" type="submit" class="btn btn-block btn-lg btn-primary btn-xs-fixed"><span>Enviar comentario</span></button>
+                                            </span>
+
+                                            @endif
+
+
 
 
                                         </aside>

@@ -28,6 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -37,9 +39,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $relations = ['comentarios'];
+
     public function publicaciones(){
 
         return $this->hasMany('App\Publication');
 
     }
+
+    public function comentarios(){
+
+        return $this->hasMany('App\Comment');
+    }
+
+
 }
